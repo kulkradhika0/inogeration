@@ -2,19 +2,14 @@
 <head>
 <link rel="stylesheet" type="text/css" href="Temp_Del.css">
 <script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	src="jquery-2.2.3.min.js"></script>
+	<script src="angular.js"></script>
+<script src="angular-cookies.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-animate.js"></script>
+<script src="check.js"></script>
 
 <script type="text/javascript">
-	function disable_enable(disableId, enableId) {
-		console.log(disableId);
-		console.log(enableId);
-		document.getElementById(disableId).style.display = "none";
-		
-		if (enableId != null) {
-			document.getElementById(enableId).style.display = "block";
-		} 
-
-	}
+	
 	function open_curtain() {
 		$("#curtain1").animate({
 			width : 20
@@ -35,9 +30,12 @@
 
 	}
 </script>
+<script type="text/javascript">
+
+</script>
 </head>
 <body>
-	<div class="wrapper">
+	<div class="wrapper" data-ng-app="p1tracker" data-ng-controller="UserHomeController" data-ng-init="init()">
 		<div class="header">
 			<p id="golive">GSD</p>
 		</div>
@@ -50,32 +48,34 @@
 				src="before.png" id="curtain2" style="width: 50%">
 		</div>
 
+<textarea data-ng-model="type" data-ng-model="cursor">{{type}}</textarea>
 
 
 
 
 		<div class="footer">
-			<div id="start">
+			<div id="start" data-ng-if="CurrentState == '1234' && InogDetails.Name=='shweta'">
 				<div class="message">Hello Ivo, Please go ahead with Ribbon
 					cutting</div>
 				<a href="#" class="btn btn-info btn-lg"
-					onclick="disable_enable('start','start2');"> <img
+				style="transition: all linear 0.5s;"
+					data-ng-click="SaveCode('3456');"> <img
 					src="sci.png" style="width: 100px; height: 100px">
 				</a>
 			</div>
-			<div id="start2" style="display: none;">
+			<div id="start2" data-ng-if="CurrentState == '3456' && InogDetails.Name=='Radhika'">
 				<div class="message">Hello Vijay, Please go ahead with Ribbon
 					cutting</div>
 				<a href="#" class="btn btn-info btn-lg"
-					onclick="disable_enable('start2','start3');"> <img
+					data-ng-click="SaveCode('0099');"> <img
 					src="sci.png" style="width: 100px; height: 100px">
 				</a>
 			</div>
-			<div id="start3" style="display: none;">
+			<div id="start3" data-ng-if="CurrentState == '0099' && InogDetails.Name=='Gaurav'">
 				<div class="message">Hello Fredric, Please go ahead with
 					Ribbon cutting</div>
 				<a href="#" class="btn btn-info btn-lg"
-					onclick="disable_enable('start3',null);open_curtain();">
+					data-ng-click="SaveCode('0000');open_curtain();congrats();">
 					<img src="sci.png" style="width: 100px; height: 100px">
 				</a>
 			</div>
