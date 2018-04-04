@@ -67,7 +67,7 @@ appList.controller('UserAuthController', function($scope, $http, $window,
 appList
 		.controller(
 				'UserHomeController',
-				function($scope, $http, $window, $cookies, UserService) {
+				function($scope,  $interval,$http, $window, $cookies, UserService) {
 					$scope.init = function() {
 
 						var cookieData = UserService.ReadCookie();
@@ -83,20 +83,35 @@ appList
 						})
 								.then(
 										function(response) {
-											alert("hi");
-											$scope.CurrentState = response.data;
-											alert($scope.InogDetails.Name);
-											alert($scope.CurrentState);
+											console.log(response);
+											$scope.CurrentState = response.data.STATUS;
+//											alert($scope.InogDetails.Name);
+//											alert($scope.CurrentState);
 										},
 										function(error) {
-											alert("hierr");
-											$scope.CurrentState = "3456";
-											alert($scope.InogDetails.Name);
-											alert($scope.CurrentState);
+											console.log(error);
+//											$scope.CurrentState = "3456";
+//											alert($scope.InogDetails.Name);
+//											alert($scope.CurrentState);
 										});
 						
 
 					};
+					 var auto = $interval(function() {
+//					        $scope.CurrentState = "3456";
+//					        $scope.CurrentState ++;
+					        $.ajax({
+					        	method : 'POST',
+								url : 'http://35.184.243.87:8100/GLV/test_api/',
+					            success: function (response){
+					            	console.log(response);
+					            	$scope.CurrentState = response.data.STATUS;
+					              //parse your data here
+					              //you can split into lines using data.split('\n') 
+					              //an use regex functions to effectively parse it
+					            }
+					          });
+					      }, 1000);
 					$scope.logout = function() {
 						UserService.RemoveCookie();
 						window.location = 'index.html';
@@ -157,8 +172,10 @@ appList
 							url : 'http://35.184.243.87:8100/GLV/test_api/',
 							data : SaveUserAction
 						}).then(function(response) {
+							console.log(response);
 
 						}, function(error) {
+							console.log(error);
 							
 
 						});
