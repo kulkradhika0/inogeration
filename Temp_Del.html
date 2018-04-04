@@ -2,32 +2,18 @@
 <head>
 <link rel="stylesheet" type="text/css" href="Temp_Del.css">
 <script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 <script type="text/javascript">
+	function disable_enable(disableId, enableId) {
+		console.log(disableId);
+		console.log(enableId);
+		document.getElementById(disableId).style.display = "none";
+		
+		if (enableId != null) {
+			document.getElementById(enableId).style.display = "block";
+		} 
 
-function enable_button(id,disableMsg,enableMsg)
-{
- document.getElementById(id).removeAttribute("disabled"); 
- document.getElementById(disableMsg).style.display = "none";
- document.getElementById(enableMsg).style.display = "block";
- 
- $.ajax({
-     type: 'Post',
-     url: "http://127.0.0.1:8100/test.txt",
-     dataType: "json",
-     context: [],
-     success: function(data){
-         alert('got data');
-     }
-   }); 
-  return alert("hi");
-  
-  
-
- 
- 
- 
 	}
 	function open_curtain() {
 		$("#curtain1").animate({
@@ -36,7 +22,8 @@ function enable_button(id,disableMsg,enableMsg)
 		$("#curtain2").animate({
 			width : 20
 		}, 1000);
-		$('body').css('background-image', 'url("after.png")');
+		$('body').css('background-image', 'url("giphy.gif")');
+		$('body').css('background-size', 'cover');
 	}
 	function close_curtain() {
 		$("#curtain1").animate({
@@ -50,26 +37,53 @@ function enable_button(id,disableMsg,enableMsg)
 </script>
 </head>
 <body>
-	<div id="wrapper">
+	<div class="wrapper">
+		<div class="header">
+			<p id="golive">GSD</p>
+		</div>
 
 
+		<div class="content">
 
-		<div id="effect">
 
-			<p>Go-Live!</p>
 			<img src="before.png" id="curtain1" style="width: 50%"> <img
 				src="before.png" id="curtain2" style="width: 50%">
 		</div>
-		
-		<div class="message" id="Ivo">Hello Ivo, Please go ahead with Ribbon cutting</div>
-		<div class="message" id="Vijay" style="display:none;">Hello Vijay, Please go ahead with Ribbon cutting</div>
-		<div class="message" id="Fredric" style="display:none;">Hello Fredric, Please go ahead with Ribbon cutting</div>
 
-		<div id="curtain_buttons">
-			<input type="button" value="Ivo Bekker" id="start" onclick="enable_button('start2','Ivo','Vijay');">
-			<input type="button" value="Vijay Madhiyan" id="start2" onclick="enable_button('start3','Vijay','Fredric');" disabled>
-			<input type="button" value="Fredric Marimot" id="start3" onclick="open_curtain();" disabled>
-			
+
+
+
+
+		<div class="footer">
+			<div id="start">
+				<div class="message">Hello Ivo, Please go ahead with Ribbon
+					cutting</div>
+				<a href="#" class="btn btn-info btn-lg"
+					onclick="disable_enable('start','start2');"> <img
+					src="sci.png" style="width: 100px; height: 100px">
+				</a>
+			</div>
+			<div id="start2" style="display: none;">
+				<div class="message">Hello Vijay, Please go ahead with Ribbon
+					cutting</div>
+				<a href="#" class="btn btn-info btn-lg"
+					onclick="disable_enable('start2','start3');"> <img
+					src="sci.png" style="width: 100px; height: 100px">
+				</a>
+			</div>
+			<div id="start3" style="display: none;">
+				<div class="message">Hello Fredric, Please go ahead with
+					Ribbon cutting</div>
+				<a href="#" class="btn btn-info btn-lg"
+					onclick="disable_enable('start3',null);open_curtain();">
+					<img src="sci.png" style="width: 100px; height: 100px">
+				</a>
+			</div>
+
+
+
+
+
 		</div>
 	</div>
 </body>
