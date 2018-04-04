@@ -1,0 +1,76 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="Temp_Del.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+
+function enable_button(id,disableMsg,enableMsg)
+{
+ document.getElementById(id).removeAttribute("disabled"); 
+ document.getElementById(disableMsg).style.display = "none";
+ document.getElementById(enableMsg).style.display = "block";
+ 
+ $.ajax({
+     type: 'Post',
+     url: "http://127.0.0.1:8100/test.txt",
+     dataType: "json",
+     context: [],
+     success: function(data){
+         alert('got data');
+     }
+   }); 
+  return alert("hi");
+  
+  
+
+ 
+ 
+ 
+	}
+	function open_curtain() {
+		$("#curtain1").animate({
+			width : 20
+		}, 1000);
+		$("#curtain2").animate({
+			width : 20
+		}, 1000);
+		$('body').css('background-image', 'url("after.png")');
+	}
+	function close_curtain() {
+		$("#curtain1").animate({
+			width : 750
+		}, 1000);
+		$("#curtain2").animate({
+			width : 750
+		}, 1000);
+
+	}
+</script>
+</head>
+<body>
+	<div id="wrapper">
+
+
+
+		<div id="effect">
+
+			<p>Go-Live!</p>
+			<img src="before.png" id="curtain1" style="width: 50%"> <img
+				src="before.png" id="curtain2" style="width: 50%">
+		</div>
+		
+		<div class="message" id="Ivo">Hello Ivo, Please go ahead with Ribbon cutting</div>
+		<div class="message" id="Vijay" style="display:none;">Hello Vijay, Please go ahead with Ribbon cutting</div>
+		<div class="message" id="Fredric" style="display:none;">Hello Fredric, Please go ahead with Ribbon cutting</div>
+
+		<div id="curtain_buttons">
+			<input type="button" value="Ivo Bekker" id="start" onclick="enable_button('start2','Ivo','Vijay');">
+			<input type="button" value="Vijay Madhiyan" id="start2" onclick="enable_button('start3','Vijay','Fredric');" disabled>
+			<input type="button" value="Fredric Marimot" id="start3" onclick="open_curtain();" disabled>
+			
+		</div>
+	</div>
+</body>
+</html>
