@@ -62,6 +62,8 @@ appList.controller('UserAuthController', function($scope, $http, $window,
 
 			break;
 		default:
+			$scope.InogDetails.Name = "Guest";
+			window.location = 'Temp_Del.html';
 			break;
 		};
 
@@ -85,36 +87,41 @@ appList
 						//this is to get current working code
 						$http({
 							method : 'POST',
-							url : 'http://35.184.243.87:8100/GLV/test_api/',
+							url : 'http://127.0.0.1:8100/GLV/getPasscode/',
 						}).then(function(response) {
 							console.log(response);
-							$scope.currentPasscode = response.passcode;
-																		alert($scope.currentPasscode);
+							$scope.currentPasscode = response.data.passcode;
+							if($scope.currentPasscode == "0000")
+							{
+							 $scope.open_curtain();
+							}
 						}, function(error) {
 							console.log(error);
-//							$scope.currentPasscode = "1234";
-							//											alert($scope.InogDetails.Name);
-							//											alert($scope.currentPasscode);
 						});
 
 					};
-					var auto = $interval(function() {
-						//					        $scope.currentPasscode = "3456";
-						//					        $scope.currentPasscode ++;
-						$.ajax({
-							method : 'POST',
-							url : 'http://35.184.243.87:8100/GLV/test_api/',
-							success : function(response) {
-								console.log(response);
-								$scope.currentPasscode = response.passcode;
-								console.log($scope.currentPasscode);
-								if($scope.currentPasscode == "0000")
-									{
-									 $scope.open_curtain();
-									}
-							}
-						});
-					}, 10000);
+					var ajaxCall = function(){
+						 $http({
+						      method: 'GET',
+						      url: 'http://127.0.0.1:8100/GLV/getPasscode/'
+						   }).then(function (response){
+							   $scope.currentPasscode = response.data.passcode;
+								 console.log($scope.currentPasscode);
+								 if($scope.currentPasscode == "0000")
+										{
+										 $scope.open_curtain();
+										}
+								 
+						   },function (error){
+							   console.log(error);
+						   });
+					}
+
+					var interval = $interval(ajaxCall,1500)
+					
+
+					
+					
 					$scope.logout = function() {
 						UserService.RemoveCookie();
 						window.location = 'index.html';
@@ -157,6 +164,7 @@ appList
 					}
 
 					$scope.SaveCode = function(code) {
+						
 
 						var SaveUserAction = {};
 						var config = {
@@ -170,10 +178,9 @@ appList
 						SaveUserAction.passcode = code;
 						$http({
 							method : 'POST',
-							url : 'http://35.184.243.87:8100/GLV/test_api/',
+							url : 'http://127.0.0.1:8100/GLV/setPasscode/',
 							data : SaveUserAction
 						}).then(function(response) {
-							console.log(response);
 
 						}, function(error) {
 							console.log(error);

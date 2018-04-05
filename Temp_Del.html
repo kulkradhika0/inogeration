@@ -37,7 +37,7 @@
 <body>
 	<div class="wrapper" data-ng-app="p1tracker" data-ng-controller="UserHomeController" data-ng-init="init()">
 		<div class="header">
-			<p id="golive">GSD</p>
+			<p id="golive">GSD Logged in as {{InogDetails.Name}}</p>
 		</div>
 
 
@@ -54,7 +54,7 @@
 
 
 		<div class="footer">
-			<div id="start" data-ng-if="currentPasscode == '1234' && InogDetails.Name=='shweta'">
+			<div id="start" data-ng-if="currentPasscode == '1234' && InogDetails.Name=='Shweta'">
 				<div class="message">Hello Ivo, Please go ahead with Ribbon
 					cutting</div>
 				<a href="#" class="btn btn-info btn-lg"
@@ -62,6 +62,12 @@
 					data-ng-click="SaveCode('3456');"> <img
 					src="sci.png" style="width: 100px; height: 100px">
 				</a>
+			</div>
+			<div id="start" data-ng-if="currentPasscode == '3456' && InogDetails.Name=='Shweta'">
+				<div class="message">Waiting for Vijay to go ahead....</div>
+			</div>
+			<div id="start" data-ng-if="currentPasscode == '0099' && InogDetails.Name=='Shweta'">
+				<div class="message">Waiting for Fredric to go ahead....</div>
 			</div>
 			<div id="start2" data-ng-if="currentPasscode == '3456' && InogDetails.Name=='Radhika'">
 				<div class="message">Hello Vijay, Please go ahead with Ribbon
@@ -71,6 +77,12 @@
 					src="sci.png" style="width: 100px; height: 100px">
 				</a>
 			</div>
+			<div id="start" data-ng-if="currentPasscode == '1234' && InogDetails.Name=='Radhika'">
+				<div class="message">Waiting for Ivo to go ahead....</div>
+			</div>
+			<div id="start" data-ng-if="currentPasscode == '0099' && InogDetails.Name=='Radhika'">
+				<div class="message">Waiting for Fredric to go ahead....</div>
+			</div>
 			<div id="start3" data-ng-if="currentPasscode == '0099' && InogDetails.Name=='Gaurav'">
 				<div class="message">Hello Fredric, Please go ahead with
 					Ribbon cutting</div>
@@ -78,6 +90,21 @@
 					data-ng-click="SaveCode('0000');open_curtain();congrats();">
 					<img src="sci.png" style="width: 100px; height: 100px">
 				</a>
+			</div>
+			<div id="start" data-ng-if="currentPasscode == '1234' && InogDetails.Name=='Gaurav'">
+				<div class="message">Waiting for Ivo to go ahead....</div>
+			</div>
+			<div id="start" data-ng-if="currentPasscode == '3456' && InogDetails.Name=='Gaurav'">
+				<div class="message">Waiting for Vijay to go ahead....</div>
+			</div>
+			<div id="start" data-ng-if="currentPasscode == '1234' && InogDetails.Name=='Guest'">
+				<div class="message">Waiting for Ivo to go ahead....</div>
+			</div>
+			<div id="start" data-ng-if="currentPasscode == '3456' && InogDetails.Name=='Guest'">
+				<div class="message">Waiting for Vijay to go ahead....</div>
+			</div>
+			<div id="start" data-ng-if="currentPasscode == '0099' && InogDetails.Name=='Guest'">
+				<div class="message">Waiting for Fredric to go ahead....</div>
 			</div>
 
 
