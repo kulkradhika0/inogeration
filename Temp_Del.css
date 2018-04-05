@@ -53,6 +53,17 @@ font-size: 30px;
  position:absolute;
  height:220px;
  right:0px;
+}input[type=text], input[type=tel],input[type=email], input[type=password], select, textarea {
+	width: 50%;
+	padding: 6px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-sizing: border-box;
+	    margin-top: 6px;
+	margin-bottom: 10px;
+	resize: vertical;
+	box-shadow: 2px 3px 4px rgba(0, 0, 0, .175);
+	line-height: 20px;
 }
 .footer input[type="button"]
 {
@@ -73,6 +84,33 @@ span {
 .message
 {
 	color: white;
+}
+.saveButt {
+	background: #E60000 none repeat scroll 0 0;
+	color: #fff;
+	font-size: 20px;
+	font-weight: 500;
+	padding: 10px 35px;
+	text-align: center;
+	border: none;
+	margin-right: 15px;
+	cursor: pointer;
+}
+
+.saveButt:hover {
+	text-decoration: none !important;
+	color: #fff;
+	background: #bd0000;
+}
+
+.saveButt:visited {
+	text-decoration: none !important;
+	color: #fff !important
+}
+
+.saveButt:link {
+	text-decoration: none;
+	color: #fff !important;
 }
 
 ​

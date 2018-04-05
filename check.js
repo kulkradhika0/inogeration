@@ -30,35 +30,40 @@ appList.controller('UserAuthController', function($scope, $http, $window,
 	$scope.loginAuth = function() {
 		var data = $scope.UserAuth;
 		console.log(data);
+
 		$scope.InogDetails = {};
 
-		if ($scope.UserAuth.USERNAME == 'shweta.dandekar@vodafone.com'
-				&& $scope.UserAuth.PASSCODE == '1234') {
-			$scope.InogDetails.Name = "shweta";
+		switch ($scope.UserAuth.USERNAME) {
+		case 'shweta.dandekar@vodafone.com':
+			$scope.InogDetails.Name = "Shweta";
 			$scope.InogDetails.Email = "shweta.dandekar@vodafone.com";
 			$scope.InogDetails.AuthCode = "1234";
 			UserService.WriteCookie($scope.InogDetails);
 
 			window.location = 'Temp_Del.html';
-		}
-		if ($scope.UserAuth.USERNAME == 'radhika.kulkarni@vodafone.com'
-				&& $scope.UserAuth.PASSCODE == '3456') {
+
+			break;
+		case 'radhika.kulkarni@vodafone.com':
 			$scope.InogDetails.Name = "Radhika";
 			$scope.InogDetails.Email = "radhika.kulkarni@vodafone.com";
 			$scope.InogDetails.AuthCode = "3456";
 			UserService.WriteCookie($scope.InogDetails);
 
 			window.location = 'Temp_Del.html';
-		}
-		if ($scope.UserAuth.USERNAME == 'gaurav.migalani@vodafone.com'
-				&& $scope.UserAuth.PASSCODE == '0099') {
+
+			break;
+		case 'gaurav.migalani@vodafone.com':
 			$scope.InogDetails.Name = "Gaurav";
 			$scope.InogDetails.Email = "gaurav.migalani@vodafone.com";
 			$scope.InogDetails.AuthCode = "0099";
 			UserService.WriteCookie($scope.InogDetails);
 
 			window.location = 'Temp_Del.html';
-		}
+
+			break;
+		default:
+			break;
+		};
 
 	};
 
@@ -67,7 +72,8 @@ appList.controller('UserAuthController', function($scope, $http, $window,
 appList
 		.controller(
 				'UserHomeController',
-				function($scope,  $interval,$http, $window, $cookies, UserService) {
+				function($scope, $interval, $http, $window, $cookies,
+						UserService) {
 					$scope.init = function() {
 
 						var cookieData = UserService.ReadCookie();
@@ -80,38 +86,35 @@ appList
 						$http({
 							method : 'POST',
 							url : 'http://35.184.243.87:8100/GLV/test_api/',
-						})
-								.then(
-										function(response) {
-											console.log(response);
-											$scope.CurrentState = response.data.STATUS;
-//											alert($scope.InogDetails.Name);
-//											alert($scope.CurrentState);
-										},
-										function(error) {
-											console.log(error);
-//											$scope.CurrentState = "3456";
-//											alert($scope.InogDetails.Name);
-//											alert($scope.CurrentState);
-										});
-						
+						}).then(function(response) {
+							console.log(response);
+							$scope.currentPasscode = response.passcode;
+																		alert($scope.currentPasscode);
+						}, function(error) {
+							console.log(error);
+//							$scope.currentPasscode = "1234";
+							//											alert($scope.InogDetails.Name);
+							//											alert($scope.currentPasscode);
+						});
 
 					};
-					 var auto = $interval(function() {
-//					        $scope.CurrentState = "3456";
-//					        $scope.CurrentState ++;
-					        $.ajax({
-					        	method : 'POST',
-								url : 'http://35.184.243.87:8100/GLV/test_api/',
-					            success: function (response){
-					            	console.log(response);
-					            	$scope.CurrentState = response.data.STATUS;
-					              //parse your data here
-					              //you can split into lines using data.split('\n') 
-					              //an use regex functions to effectively parse it
-					            }
-					          });
-					      }, 1000);
+					var auto = $interval(function() {
+						//					        $scope.currentPasscode = "3456";
+						//					        $scope.currentPasscode ++;
+						$.ajax({
+							method : 'POST',
+							url : 'http://35.184.243.87:8100/GLV/test_api/',
+							success : function(response) {
+								console.log(response);
+								$scope.currentPasscode = response.passcode;
+								console.log($scope.currentPasscode);
+								if($scope.currentPasscode == "0000")
+									{
+									 $scope.open_curtain();
+									}
+							}
+						});
+					}, 10000);
 					$scope.logout = function() {
 						UserService.RemoveCookie();
 						window.location = 'index.html';
@@ -159,14 +162,12 @@ appList
 						var config = {
 							headers : {
 								'Content-Type' : 'Content-Type: application/json; charset=utf-8',
-								'Access-Control-Allow-Origin': '*'
-								
-									
+								'Access-Control-Allow-Origin' : '*'
+
 							}
 						}
-						SaveUserAction.Email = code;
-						$scope.CurrentState = code;
-						console.log(SaveUserAction);
+						console.log(code);
+						SaveUserAction.passcode = code;
 						$http({
 							method : 'POST',
 							url : 'http://35.184.243.87:8100/GLV/test_api/',
@@ -176,7 +177,6 @@ appList
 
 						}, function(error) {
 							console.log(error);
-							
 
 						});
 					}
