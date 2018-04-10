@@ -1,4 +1,5 @@
-var appList = angular.module('p1tracker', [ 'ngCookies', 'ngAnimate' ]);
+//var appList = angular.module('p1tracker', [ 'ngCookies', 'ngAnimate' ]);
+var appList = angular.module('p1tracker', [ 'ngCookies' ]);
 appList.factory("UserService", function($cookies) {
 
 	return {
@@ -52,9 +53,9 @@ appList.controller('UserAuthController', function($scope, $http, $window,
 			window.location = 'Temp_Del.html';
 
 			break;
-		case 'gaurav.migalani@vodafone.com':
+		case 'gaurav.miglani@vodafone.com':
 			$scope.InogDetails.Name = "Gaurav";
-			$scope.InogDetails.Email = "gaurav.migalani@vodafone.com";
+			$scope.InogDetails.Email = "gaurav.miglani@vodafone.com";
 			$scope.InogDetails.AuthCode = "0099";
 			UserService.WriteCookie($scope.InogDetails);
 
@@ -87,7 +88,7 @@ appList
 						//this is to get current working code
 						$http({
 							method : 'POST',
-							url : 'http://127.0.0.1:8100/GLV/getPasscode/',
+							url : 'http://ec2-18-218-82-100.us-east-2.compute.amazonaws.com:8100/GLV/getPasscode/',
 						}).then(function(response) {
 							console.log(response);
 							$scope.currentPasscode = response.data.passcode;
@@ -103,7 +104,7 @@ appList
 					var ajaxCall = function(){
 						 $http({
 						      method: 'GET',
-						      url: 'http://127.0.0.1:8100/GLV/getPasscode/'
+						      url: 'http://ec2-18-218-82-100.us-east-2.compute.amazonaws.com:8100/GLV/getPasscode/'
 						   }).then(function (response){
 							   $scope.currentPasscode = response.data.passcode;
 								 console.log($scope.currentPasscode);
@@ -178,7 +179,7 @@ appList
 						SaveUserAction.passcode = code;
 						$http({
 							method : 'POST',
-							url : 'http://127.0.0.1:8100/GLV/setPasscode/',
+							url : 'http://ec2-18-218-82-100.us-east-2.compute.amazonaws.com:8100/GLV/setPasscode/',
 							data : SaveUserAction
 						}).then(function(response) {
 
