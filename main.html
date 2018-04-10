@@ -1,0 +1,220 @@
+<html>
+<head>
+<title>Vodafone Digital Inauguration</title>
+<style>
+body {
+	text-align: center;
+	width: 100%;
+	margin: 0 auto;
+	padding: 0px;
+	font-family: helvetica;
+/* 	 	background-image: url("golive.gif");  */
+	background-color: black; background-size : cover;
+	color: gold;
+	font-size: 30px;
+	background-size: cover;
+}
+
+.wrapper {
+	text-align: center;
+	margin: 0 auto;
+	padding: 0px;
+	width: 100%;
+}
+
+.header {
+	margin-top: 10px;
+	height:5%;
+}
+
+.content {
+	position: relative;
+	margin-top: 10px;
+	height: 40%;
+}
+.cutter {
+	height: 40%;
+	    margin-left: 45%;
+}
+.footer {
+	height: 10%;
+}
+
+#curtain1 {
+	top: 0px;
+	position: absolute;
+	left: 0px;
+	height: 220px;
+}
+
+#curtain2 {
+	top: 0px;
+	position: absolute;
+	height: 220px;
+	right: 0px;
+}
+
+input[type=text], input[type=tel], input[type=email], input[type=password],
+	select, textarea {
+	width: 50%;
+	padding: 6px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-sizing: border-box;
+	margin-top: 6px;
+	margin-bottom: 10px;
+	resize: vertical;
+	box-shadow: 2px 3px 4px rgba(0, 0, 0, .175);
+	line-height: 20px;
+}
+
+
+
+span {
+	content: "\2702";
+	ransform: rotate(270deg);
+}
+
+.message {
+	color: white;
+}
+
+.saveButt {
+	background: #E60000 none repeat scroll 0 0;
+	color: #fff;
+	font-size: 20px;
+	font-weight: 500;
+	padding: 10px 35px;
+	text-align: center;
+	border: none;
+	margin-right: 15px;
+	cursor: pointer;
+}
+
+.saveButt:hover {
+	text-decoration: none !important;
+	color: #fff;
+	background: #bd0000;
+}
+
+.saveButt:visited {
+	text-decoration: none !important;
+	color: #fff !important
+}
+
+.saveButt:link {
+	text-decoration: none;
+	color: #fff !important;
+}
+</style>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- <script src="jquery-2.2.3.min.js"></script> -->
+<script src="angular.js"></script>
+<script src="angular-cookies.js"></script>
+<script src="inauguration.js"></script>
+
+</head>
+<body>
+	<div class="wrapper" data-ng-app="p1tracker"
+		data-ng-controller="UserHomeController" data-ng-init="init()">
+		<div class="header">
+			<p id="golive">GSD Logged in as {{InogDetails.Name}}</p>
+			<audio id="audio" src="applause-01.mp3" ></audio>
+		</div>
+
+
+		<div class="content">
+
+
+			<img src="before.png" id="curtain1" style="width: 50%"> <img
+				src="before.png" id="curtain2" style="width: 50%">
+		</div>
+
+<!-- 		<div class="cutter" data-ng-if="currentPasscode == InogDetails.AuthCode"> -->
+		<div class="cutter" data-ng-if="currentPasscode == '1234' && currentPasscode == InogDetails.AuthCode">
+			<div id="cutit" style="position: absolute;"
+				data-ng-click="SaveCode('3456')">
+				<img src="final.gif" id="test" style="width: 200px; height: 200px">
+			</div>
+
+		</div>
+		<div class="cutter" data-ng-if="currentPasscode == '3456' && currentPasscode == InogDetails.AuthCode">
+			<div id="cutit" style="position: absolute;"
+				data-ng-click="SaveCode('0099')">
+				<img src="final.gif" id="test" style="width: 200px; height: 200px">
+			</div>
+
+		</div>
+		<div class="cutter" data-ng-if="currentPasscode == '0099' && currentPasscode == InogDetails.AuthCode">
+			<div id="cutit" style="position: absolute;"
+				data-ng-click="SaveCode('0000')">
+				<img src="final.gif" id="test" style="width: 200px; height: 200px">
+			</div>
+
+		</div>
+
+		<div class="footer">
+			<div id="start"
+				data-ng-if="currentPasscode == '1234' && InogDetails.Name=='Shweta'">
+				<div class="message">Hello Ivo, Please "click here" to cut
+					Ribbon</div>
+
+
+
+			</div>
+			<div id="start"
+				data-ng-if="currentPasscode == '3456' && InogDetails.Name=='Shweta'">
+				<div class="message">Waiting for Vijay to go ahead....</div>
+			</div>
+			<div id="start"
+				data-ng-if="currentPasscode == '0099' && InogDetails.Name=='Shweta'">
+				<div class="message">Waiting for Fredric to go ahead....</div>
+			</div>
+			<div id="start2"
+				data-ng-if="currentPasscode == '3456' && InogDetails.Name=='Radhika'">
+				<div class="message">Hello Vijay, Please go ahead with Ribbon
+					cutting</div>
+			</div>
+			<div id="start"
+				data-ng-if="currentPasscode == '1234' && InogDetails.Name=='Radhika'">
+				<div class="message">Waiting for Ivo to go ahead....</div>
+			</div>
+			<div id="start"
+				data-ng-if="currentPasscode == '0099' && InogDetails.Name=='Radhika'">
+				<div class="message">Waiting for Fredric to go ahead....</div>
+			</div>
+			<div id="start3"
+				data-ng-if="currentPasscode == '0099' && InogDetails.Name=='Gaurav'">
+				<div class="message">Hello Fredric, Please go ahead with
+					Ribbon cutting</div>
+			</div>
+			<div id="start"
+				data-ng-if="currentPasscode == '1234' && InogDetails.Name=='Gaurav'">
+				<div class="message">Waiting for Ivo to go ahead....</div>
+			</div>
+			<div id="start"
+				data-ng-if="currentPasscode == '3456' && InogDetails.Name=='Gaurav'">
+				<div class="message">Waiting for Vijay to go ahead....</div>
+			</div>
+			<div id="start"
+				data-ng-if="currentPasscode == '1234' && InogDetails.Name=='Guest'">
+				<div class="message">Waiting for Ivo to go ahead....</div>
+			</div>
+			<div id="start"
+				data-ng-if="currentPasscode == '3456' && InogDetails.Name=='Guest'">
+				<div class="message">Waiting for Vijay to go ahead....</div>
+			</div>
+			<div id="start"
+				data-ng-if="currentPasscode == '0099' && InogDetails.Name=='Guest'">
+				<div class="message">Waiting for Fredric to go ahead....</div>
+			</div>
+
+
+
+
+
+		</div>
+	</div>
+</body>
+</html>

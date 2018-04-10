@@ -1,4 +1,3 @@
-//var appList = angular.module('p1tracker', [ 'ngCookies', 'ngAnimate' ]);
 var appList = angular.module('p1tracker', [ 'ngCookies' ]);
 appList.factory("UserService", function($cookies) {
 
@@ -23,7 +22,7 @@ appList.controller('UserAuthController', function($scope, $http, $window,
 		var cookieData = UserService.ReadCookie();
 		console.log(cookieData);
 		if (cookieData != null) {
-			window.location = 'Temp_Del.html';
+			window.location = 'main.html';
 		}
 
 	};
@@ -41,7 +40,7 @@ appList.controller('UserAuthController', function($scope, $http, $window,
 			$scope.InogDetails.AuthCode = "1234";
 			UserService.WriteCookie($scope.InogDetails);
 
-			window.location = 'Temp_Del.html';
+			window.location = 'main.html';
 
 			break;
 		case 'radhika.kulkarni@vodafone.com':
@@ -50,7 +49,7 @@ appList.controller('UserAuthController', function($scope, $http, $window,
 			$scope.InogDetails.AuthCode = "3456";
 			UserService.WriteCookie($scope.InogDetails);
 
-			window.location = 'Temp_Del.html';
+			window.location = 'main.html';
 
 			break;
 		case 'gaurav.miglani@vodafone.com':
@@ -59,14 +58,15 @@ appList.controller('UserAuthController', function($scope, $http, $window,
 			$scope.InogDetails.AuthCode = "0099";
 			UserService.WriteCookie($scope.InogDetails);
 
-			window.location = 'Temp_Del.html';
+			window.location = 'main.html';
 
 			break;
 		default:
 			$scope.InogDetails.Name = "Guest";
-			window.location = 'Temp_Del.html';
+			window.location = 'main.html';
 			break;
-		};
+		}
+		;
 
 	};
 
@@ -86,43 +86,55 @@ appList
 						}
 						$scope.InogDetails = cookieData;
 						//this is to get current working code
-						$http({
-							method : 'POST',
-							url : 'http://ec2-18-218-82-100.us-east-2.compute.amazonaws.com:8100/GLV/getPasscode/',
-						}).then(function(response) {
+						$http(
+								{
+									method : 'POST',
+									url : 'http://127.0.0.1:8100/GLV/getPasscode/',
+								}).then(function(response) {
 							console.log(response);
 							$scope.currentPasscode = response.data.passcode;
-							if($scope.currentPasscode == "0000")
-							{
-							 $scope.open_curtain();
+							if ($scope.currentPasscode == "0000") {
+								$scope.open_curtain();
+							}
+							else {
+								$('body').css('background-color', 'black');
+								$('body').css('background-image', 'none');
+								$('#curtain1').css('width', '50%');
+								$('#curtain2').css('width', '50%');
+								$('body').css('background-size', 'cover');
+
 							}
 						}, function(error) {
 							console.log(error);
 						});
 
 					};
-					var ajaxCall = function(){
-						 $http({
-						      method: 'GET',
-						      url: 'http://ec2-18-218-82-100.us-east-2.compute.amazonaws.com:8100/GLV/getPasscode/'
-						   }).then(function (response){
-							   $scope.currentPasscode = response.data.passcode;
-								 console.log($scope.currentPasscode);
-								 if($scope.currentPasscode == "0000")
-										{
-										 $scope.open_curtain();
-										}
-								 
-						   },function (error){
-							   console.log(error);
-						   });
+					var ajaxCall = function() {
+						$http(
+								{
+									method : 'GET',
+									url : 'http://127.0.0.1:8100/GLV/getPasscode/'
+								}).then(function(response) {
+							$scope.currentPasscode = response.data.passcode;
+							console.log($scope.currentPasscode);
+							if ($scope.currentPasscode == "0000") {
+								$scope.open_curtain();
+							} else {
+								$('body').css('background-color', 'black');
+								$('body').css('background-image', 'none');
+								$('#curtain1').css('width', '50%');
+								$('#curtain2').css('width', '50%');
+								$('body').css('background-size', 'cover');
+
+							}
+
+						}, function(error) {
+							console.log(error);
+						});
 					}
 
-					var interval = $interval(ajaxCall,1500)
-					
+					var interval = $interval(ajaxCall, 1500)
 
-					
-					
 					$scope.logout = function() {
 						UserService.RemoveCookie();
 						window.location = 'index.html';
@@ -149,24 +161,15 @@ appList
 						$('body').css('background-image', 'url("giphy.gif")');
 						$('body').css('background-size', 'cover');
 
+						var audio = document.getElementById("audio");
+						audio.play();
+
 					}
 
-					$scope.congrats = function() {
-						var content = "contentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontent";
-
-						$scope.type = "";
-						var i = 0;
-						var timer = setInterval(function() {
-							if (i < content.length)
-								$scope.type += content[i];
-							i++;
-							$scope.$apply();
-						}, 100);
-					}
+				
 
 					$scope.SaveCode = function(code) {
-						
-
+//						alert(code);
 						var SaveUserAction = {};
 						var config = {
 							headers : {
@@ -177,11 +180,21 @@ appList
 						}
 						console.log(code);
 						SaveUserAction.passcode = code;
-						$http({
-							method : 'POST',
-							url : 'http://ec2-18-218-82-100.us-east-2.compute.amazonaws.com:8100/GLV/setPasscode/',
-							data : SaveUserAction
-						}).then(function(response) {
+						$http(
+								{
+									method : 'POST',
+									url : 'http://127.0.0.1:8100/GLV/setPasscode/',
+									data : SaveUserAction
+								}).then(function(response) {
+									$("#cutit").animate({
+							            top: '100px'
+							        });
+									$("#curtain1").animate({
+										width : 20
+									}, 1000);
+									$("#curtain2").animate({
+										width : 20
+									}, 1000);
 
 						}, function(error) {
 							console.log(error);
