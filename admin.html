@@ -16,6 +16,10 @@ body {
 	background-size: cover;
 }
 
+.pom-agile
+{
+margin-top:10%;}
+
 #marquee {
 	font-size: 100px;
 }
@@ -95,6 +99,7 @@ span {
 	border: none;
 	margin-right: 15px;
 	cursor: pointer;
+	margin-top:10%;
 }
 
 .saveButt:hover {
@@ -123,13 +128,24 @@ span {
 </head>
 <body>
 	<div class="wrapper" data-ng-app="p1tracker"
-		data-ng-controller="UserHomeController" data-ng-init="init()">
+		data-ng-controller="AdminController" data-ng-init="init()">
 		<div class="header">
-			<p id="golive">Welcome Admin</p>
-			<audio id="audio" src="test.mp3"></audio>
+			<div class="pom-agile">
+							Welcome Admin
+						</div>
 		</div>
 
-		<div data-ng-click="startLaunch()">Start Launch</div>
+<div data-ng-if="adminAction">
+
+<div class="sub-w3l">
+							<div class="right-w3l">
+								<input class="saveButt" data-ng-click="startLaunch()"
+									type="submit" value="Start Launch">
+							</div>
+						</div>
+
+	</div>
+	<div class="message">{{waitingMsg}}</div>
 	</div>
 
 </body>

@@ -103,7 +103,7 @@ appList
 						// this is to get current working code
 						$http({
 							method : 'POST',
-							url : 'http://127.0.0.1:8100/GLV/getPasscode/',
+							url : 'http://ec2-18-218-82-100.us-east-2.compute.amazonaws.com:8100/GLV/getPasscode/',
 						})
 								.then(
 										function(response) {
@@ -112,13 +112,6 @@ appList
 											if ($scope.currentPasscode == "0000") {
 												$scope.open_curtain();
 												$scope.waitingMsg = null;
-												if($scope.InogDetails.SecretKey == "Ys9h5DhTHWpNteT3")
-													{
-													$('body').css(
-															'background-image',
-															'url("backim.jpg")');
-													window.location='admin.html';
-													}
 
 											} else {
 												$('body').css(
@@ -164,7 +157,7 @@ appList
 					var ajaxCall = function() {
 						$http({
 							method : 'GET',
-							url : 'http://127.0.0.1:8100/GLV/getPasscode/'
+							url : 'http://ec2-18-218-82-100.us-east-2.compute.amazonaws.com:8100/GLV/getPasscode/'
 						})
 								.then(
 										function(response) {
@@ -173,13 +166,6 @@ appList
 											if ($scope.currentPasscode == "0000") {
 												$scope.open_curtain();
 												$scope.waitingMsg = null;
-												if($scope.InogDetails.SecretKey == "Ys9h5DhTHWpNteT3")
-												{
-													$('body').css(
-															'background-image',
-															'url("backim.jpg")');
-												window.location='admin.html';
-												}
 											} else {
 												$('body').css(
 														'background-color',
@@ -258,35 +244,7 @@ appList
 						audio.play();
 
 					}
-					$scope.startLaunch = function()
-					{
-
-						var startLaunchObj = {};
-
-						 alert("start");
-						startLaunchObj.passcode = 1234;
-						
-						var config = {
-							headers : {
-								'Content-Type' : 'Content-Type: application/json; charset=utf-8',
-								'Access-Control-Allow-Origin' : '*'
-
-							}
-						}
-						
-						$http({
-							method : 'POST',
-							url : 'http://127.0.0.1:8100/GLV/setPasscode/',
-							data : startLaunchObj
-						}).then(function(response) {
-							window.location='main.html';
-							
-						}, function(error) {
-							console.log(error);
-
-						});
 					
-					}
 
 					$scope.SaveCode = function(code) {
 						var SaveUserAction = {};
@@ -312,7 +270,6 @@ appList
 						
 						
 						}
-						// alert(code);
 						SaveUserAction.passcode = passcode;
 						
 						var config = {
@@ -325,7 +282,7 @@ appList
 						
 						$http({
 							method : 'POST',
-							url : 'http://127.0.0.1:8100/GLV/setPasscode/',
+							url : 'http://ec2-18-218-82-100.us-east-2.compute.amazonaws.com:8100/GLV/setPasscode/',
 							data : SaveUserAction
 						}).then(function(response) {
 							$("#cutit").animate({
@@ -347,3 +304,131 @@ appList
 					}
 
 				});
+appList
+.controller(
+		'AdminController',
+		function($scope, $interval, $http, $window, $cookies,
+				UserService) {
+			$scope.init = function() {
+
+				var cookieData = UserService.ReadCookie();
+				console.log(cookieData);
+				if (cookieData == null) {
+					window.location = 'index.html';
+				}
+				$scope.InogDetails = cookieData;
+				// this is to get current working code
+				$http({
+					method : 'POST',
+					url : 'http://ec2-18-218-82-100.us-east-2.compute.amazonaws.com:8100/GLV/getPasscode/',
+				})
+						.then(
+								function(response) {
+									console.log(response);
+									$scope.currentPasscode = response.data.passcode;
+									if ($scope.currentPasscode == "0000") {
+										
+										$scope.adminAction = true;
+
+									} else {
+										$scope.adminAction = false;
+										
+										switch ($scope.currentPasscode) {
+										case 1234:
+											$scope.waitingMsg = "Waiting for Frederic to inaugurate..";
+											break;
+										case 3456:
+											$scope.waitingMsg = "Waiting for Ivo to inaugurate..";
+											break;
+										case 5678:
+											$scope.waitingMsg = "Waiting for Tatiana to inaugurate..";
+											break;
+										case 7890:
+											$scope.waitingMsg = "Waiting for Vijay to inaugurate..";
+											break;
+										default:
+											$scope.waitingMsg = "Waiting for Sudhir to inaugurate..";
+											break;
+										
+										}
+
+									}
+								}, function(error) {
+									console.log(error);
+								});
+
+			};
+			var ajaxCall = function() {
+				$http({
+					method : 'GET',
+					url : 'http://ec2-18-218-82-100.us-east-2.compute.amazonaws.com:8100/GLV/getPasscode/'
+				})
+						.then(
+								function(response) {
+									$scope.currentPasscode = response.data.passcode;
+									console.log($scope.currentPasscode);
+									if ($scope.currentPasscode == "0000") {
+										$scope.adminAction = true;
+									} else {
+										$scope.adminAction = false;
+										switch ($scope.currentPasscode) {
+										case 1234:
+											$scope.waitingMsg = "Waiting for Frederic to inaugurate..";
+											break;
+										case 3456:
+											$scope.waitingMsg = "Waiting for Ivo to inaugurate..";
+											break;
+										case 5678:
+											$scope.waitingMsg = "Waiting for Tatiana to inaugurate..";
+											break;
+										case 7890:
+											$scope.waitingMsg = "Waiting for Vijay to inaugurate..";
+											break;
+										default:
+											$scope.waitingMsg = "Waiting for Sudhir to inaugurate..";
+											break;
+										
+										
+										}
+
+
+									}
+
+								}, function(error) {
+									console.log(error);
+								});
+			}
+
+			var interval = $interval(ajaxCall, 1500)
+
+			$scope.startLaunch = function()
+			{
+
+				var startLaunchObj = {};
+
+				startLaunchObj.passcode = 1234;
+				
+				var config = {
+					headers : {
+						'Content-Type' : 'Content-Type: application/json; charset=utf-8',
+						'Access-Control-Allow-Origin' : '*'
+
+					}
+				}
+				
+				$http({
+					method : 'POST',
+					url : 'http://ec2-18-218-82-100.us-east-2.compute.amazonaws.com:8100/GLV/setPasscode/',
+					data : startLaunchObj
+				}).then(function(response) {
+					window.location='main.html';
+					
+				}, function(error) {
+					console.log(error);
+
+				});
+			
+			}
+
+			
+		});
