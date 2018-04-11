@@ -1,0 +1,136 @@
+<html>
+<head>
+<title>Vodafone Digital Inauguration</title>
+<style>
+body {
+	text-align: center;
+	width: 100%;
+	margin: 0 auto;
+	padding: 0px;
+	font-family: helvetica;
+	background-image: url("backim.jpeg");
+	/* 	background-color: black;  */
+	background-size: cover;
+	color: gold;
+	font-size: 30px;
+	background-size: cover;
+}
+
+#marquee {
+	font-size: 100px;
+}
+
+.wrapper {
+	text-align: center;
+	margin: 0 auto;
+	padding: 0px;
+	width: 100%;
+}
+
+.header {
+	margin-top: 10px;
+	height: 5%;
+}
+
+.content {
+	position: relative;
+	margin-top: 10%;
+	height: 30%;
+}
+
+.cutter {
+	height: 30%;
+	cursor: pointer;
+	margin-left: 45%;
+}
+
+.footer {
+	height: 10%;
+}
+
+#curtain1 {
+	top: 0px;
+	position: absolute;
+	left: 0px;
+	height: 220px;
+}
+
+#curtain2 {
+	top: 0px;
+	position: absolute;
+	height: 220px;
+	right: 0px;
+}
+
+input[type=text], input[type=tel], input[type=email], input[type=password],
+	select, textarea {
+	width: 50%;
+	padding: 6px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-sizing: border-box;
+	margin-top: 6px;
+	margin-bottom: 10px;
+	resize: vertical;
+	box-shadow: 2px 3px 4px rgba(0, 0, 0, .175);
+	line-height: 20px;
+}
+
+span {
+	content: "\2702";
+	ransform: rotate(270deg);
+}
+
+.message {
+	color: white;
+}
+
+.saveButt {
+	background: #E60000 none repeat scroll 0 0;
+	color: #fff;
+	font-size: 20px;
+	font-weight: 500;
+	padding: 10px 35px;
+	text-align: center;
+	border: none;
+	margin-right: 15px;
+	cursor: pointer;
+}
+
+.saveButt:hover {
+	text-decoration: none !important;
+	color: #fff;
+	background: #bd0000;
+}
+
+.saveButt:visited {
+	text-decoration: none !important;
+	color: #fff !important
+}
+
+.saveButt:link {
+	text-decoration: none;
+	color: #fff !important;
+}
+</style>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- <script src="jquery-2.2.3.min.js"></script> -->
+<script src="angular.js"></script>
+<script src="angular-cookies.js"></script>
+<script src="inauguration.js"></script>
+
+</head>
+<body>
+	<div class="wrapper" data-ng-app="p1tracker"
+		data-ng-controller="UserHomeController" data-ng-init="init()">
+		<div class="header">
+			<p id="golive">Welcome Admin</p>
+			<audio id="audio" src="test.mp3"></audio>
+		</div>
+
+		<div data-ng-click="startLaunch()">Start Launch</div>
+	</div>
+
+</body>
+</html>

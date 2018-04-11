@@ -8,10 +8,14 @@ body {
 	margin: 0 auto;
 	padding: 0px;
 	font-family: helvetica;
-	background-image: url("golive.gif");
+	background-image: url("main_bg.jpg");
 	background-size: cover;
 	color: gold;
 	font-size: 30px;
+}
+.pom-agile
+{
+    margin-top: 10%;
 }
 
 .wrapper {
@@ -47,7 +51,7 @@ body {
 
 input[type=text], input[type=tel], input[type=email], input[type=password],
 	select, textarea {
-	width: 50%;
+	width: 250px;
 	padding: 6px;
 	border: 1px solid #ccc;
 	border-radius: 4px;
@@ -106,6 +110,12 @@ span {
 	text-decoration: none;
 	color: #fff !important;
 }
+h1{
+    color: #FAF41D;
+}
+.header-w3l
+{
+margin-top:10%;}
 </style>
 <script src="jquery-2.2.3.min.js"></script>
 <script src="angular.js"></script>
@@ -119,20 +129,20 @@ span {
 		<div class="center-container">
 			<!--header-->
 			<div class="header-w3l">
-				<h1>GSD Inauguration</h1>
+				<h1>Welcome to GSD Inauguration console</h1>
 			</div>
 			<!--//header-->
 			<div class="main-content-agile">
 				<div class="sub-main-w3">
 					<div class="wthree-pro">
-						<h4>Please enter your email id to view Inauguration</h4>
+<!-- 						<h4>Please enter your key to launch Inauguration</h4> -->
 					</div>
 
 					<form>
 
 						<div class="pom-agile">
-							<input data-ng-model="UserAuth.USERNAME" placeholder="E-mail"
-								name="Name" class="user" type="email" required> <span
+							<input data-ng-model="UserAuth.USERNAME" placeholder="Enter your key to launch.."
+								name="Name" class="user" type="text" required> <span
 								class="icon1"><i class="fa fa-user" aria-hidden="true"></i></span>
 						</div>
 
@@ -140,7 +150,7 @@ span {
 						<div class="sub-w3l">
 							<div class="right-w3l">
 								<input class="saveButt" data-ng-click="loginAuth()"
-									type="submit" value="Login">
+									type="submit" value="Launch">
 							</div>
 						</div>
 

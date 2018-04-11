@@ -8,11 +8,16 @@ body {
 	margin: 0 auto;
 	padding: 0px;
 	font-family: helvetica;
-/* 	 	background-image: url("golive.gif");  */
-	background-color: black; background-size : cover;
+	background-image: url("backim.jpeg");
+	/* 	background-color: black;  */
+	background-size: cover;
 	color: gold;
 	font-size: 30px;
 	background-size: cover;
+}
+
+#marquee {
+	font-size: 100px;
 }
 
 .wrapper {
@@ -24,18 +29,21 @@ body {
 
 .header {
 	margin-top: 10px;
-	height:5%;
+	height: 5%;
 }
 
 .content {
 	position: relative;
-	margin-top: 10px;
-	height: 40%;
+	margin-top: 10%;
+	height: 30%;
 }
+
 .cutter {
-	height: 40%;
-	    margin-left: 45%;
+	height: 30%;
+	cursor: pointer;
+	margin-left: 45%;
 }
+
 .footer {
 	height: 10%;
 }
@@ -67,8 +75,6 @@ input[type=text], input[type=tel], input[type=email], input[type=password],
 	box-shadow: 2px 3px 4px rgba(0, 0, 0, .175);
 	line-height: 20px;
 }
-
-
 
 span {
 	content: "\2702";
@@ -119,100 +125,37 @@ span {
 	<div class="wrapper" data-ng-app="p1tracker"
 		data-ng-controller="UserHomeController" data-ng-init="init()">
 		<div class="header">
-			<p id="golive">GSD Logged in as {{InogDetails.Name}}</p>
-			<audio id="audio" src="applause-01.mp3" ></audio>
+			<p id="golive">Welcome {{InogDetails.Name}}</p>
+			<audio id="audio" src="test.mp3"></audio>
 		</div>
 
 
 		<div class="content">
 
-
 			<img src="before.png" id="curtain1" style="width: 50%"> <img
 				src="before.png" id="curtain2" style="width: 50%">
 		</div>
 
-<!-- 		<div class="cutter" data-ng-if="currentPasscode == InogDetails.AuthCode"> -->
-		<div class="cutter" data-ng-if="currentPasscode == '1234' && currentPasscode == InogDetails.AuthCode">
+		<div class="cutter"
+			data-ng-if="currentPasscode == InogDetails.AuthCode">
 			<div id="cutit" style="position: absolute;"
-				data-ng-click="SaveCode('3456')">
-				<img src="final.gif" id="test" style="width: 200px; height: 200px">
+				data-ng-click="SaveCode(currentPasscode)">
+				<img src="check.gif" id="test" style="width: 200px; height: 200px">
 			</div>
 
 		</div>
-		<div class="cutter" data-ng-if="currentPasscode == '3456' && currentPasscode == InogDetails.AuthCode">
-			<div id="cutit" style="position: absolute;"
-				data-ng-click="SaveCode('0099')">
-				<img src="final.gif" id="test" style="width: 200px; height: 200px">
-			</div>
 
-		</div>
-		<div class="cutter" data-ng-if="currentPasscode == '0099' && currentPasscode == InogDetails.AuthCode">
-			<div id="cutit" style="position: absolute;"
-				data-ng-click="SaveCode('0000')">
-				<img src="final.gif" id="test" style="width: 200px; height: 200px">
-			</div>
 
+		<div id="marquee">
+			<marquee style="overflow: hidden;">GSD is now live from
+				Pune.....</marquee>
 		</div>
 
 		<div class="footer">
-			<div id="start"
-				data-ng-if="currentPasscode == '1234' && InogDetails.Name=='Shweta'">
-				<div class="message">Hello Ivo, Please "click here" to cut
-					Ribbon</div>
 
-
-
+			<div id="start" data-ng-if="currentPasscode != InogDetails.AuthCode">
+				<div class="message">{{waitingMsg}}</div>
 			</div>
-			<div id="start"
-				data-ng-if="currentPasscode == '3456' && InogDetails.Name=='Shweta'">
-				<div class="message">Waiting for Vijay to go ahead....</div>
-			</div>
-			<div id="start"
-				data-ng-if="currentPasscode == '0099' && InogDetails.Name=='Shweta'">
-				<div class="message">Waiting for Fredric to go ahead....</div>
-			</div>
-			<div id="start2"
-				data-ng-if="currentPasscode == '3456' && InogDetails.Name=='Radhika'">
-				<div class="message">Hello Vijay, Please go ahead with Ribbon
-					cutting</div>
-			</div>
-			<div id="start"
-				data-ng-if="currentPasscode == '1234' && InogDetails.Name=='Radhika'">
-				<div class="message">Waiting for Ivo to go ahead....</div>
-			</div>
-			<div id="start"
-				data-ng-if="currentPasscode == '0099' && InogDetails.Name=='Radhika'">
-				<div class="message">Waiting for Fredric to go ahead....</div>
-			</div>
-			<div id="start3"
-				data-ng-if="currentPasscode == '0099' && InogDetails.Name=='Gaurav'">
-				<div class="message">Hello Fredric, Please go ahead with
-					Ribbon cutting</div>
-			</div>
-			<div id="start"
-				data-ng-if="currentPasscode == '1234' && InogDetails.Name=='Gaurav'">
-				<div class="message">Waiting for Ivo to go ahead....</div>
-			</div>
-			<div id="start"
-				data-ng-if="currentPasscode == '3456' && InogDetails.Name=='Gaurav'">
-				<div class="message">Waiting for Vijay to go ahead....</div>
-			</div>
-			<div id="start"
-				data-ng-if="currentPasscode == '1234' && InogDetails.Name=='Guest'">
-				<div class="message">Waiting for Ivo to go ahead....</div>
-			</div>
-			<div id="start"
-				data-ng-if="currentPasscode == '3456' && InogDetails.Name=='Guest'">
-				<div class="message">Waiting for Vijay to go ahead....</div>
-			</div>
-			<div id="start"
-				data-ng-if="currentPasscode == '0099' && InogDetails.Name=='Guest'">
-				<div class="message">Waiting for Fredric to go ahead....</div>
-			</div>
-
-
-
-
 
 		</div>
 	</div>

@@ -5,6 +5,7 @@ appList.factory("UserService", function($cookies) {
 		WriteCookie : function(Details) {
 
 			var test = $cookies.putObject("InogDetails", Details);
+			
 		},
 		ReadCookie : function() {
 			return $cookies.getObject("InogDetails");
@@ -32,34 +33,48 @@ appList.controller('UserAuthController', function($scope, $http, $window,
 		console.log(data);
 
 		$scope.InogDetails = {};
-
 		switch ($scope.UserAuth.USERNAME) {
-		case 'shweta.dandekar@vodafone.com':
-			$scope.InogDetails.Name = "Shweta";
-			$scope.InogDetails.Email = "shweta.dandekar@vodafone.com";
+		case 'Ys9h5DhTHWpNteT3':
+			$scope.InogDetails.Name = "Admin";
+			$scope.InogDetails.SecretKey = "Ys9h5DhTHWpNteT3";
+			$scope.InogDetails.AuthCode = "none";
+			UserService.WriteCookie($scope.InogDetails);
+			window.location='admin.html';
+			break;
+		case 'guudN5BNfvZRwSA6':
+			$scope.InogDetails.Name = "Frederic";
+			$scope.InogDetails.SecretKey = "guudN5BNfvZRwSA6";
 			$scope.InogDetails.AuthCode = "1234";
 			UserService.WriteCookie($scope.InogDetails);
-
 			window.location = 'main.html';
-
 			break;
-		case 'radhika.kulkarni@vodafone.com':
-			$scope.InogDetails.Name = "Radhika";
-			$scope.InogDetails.Email = "radhika.kulkarni@vodafone.com";
+		case 'wDCP6rH7HwYab8mJ':
+			$scope.InogDetails.Name = "Ivo";
+			$scope.InogDetails.SecretKey = "wDCP6rH7HwYab8mJ";
 			$scope.InogDetails.AuthCode = "3456";
 			UserService.WriteCookie($scope.InogDetails);
-
 			window.location = 'main.html';
-
 			break;
-		case 'gaurav.miglani@vodafone.com':
-			$scope.InogDetails.Name = "Gaurav";
-			$scope.InogDetails.Email = "gaurav.miglani@vodafone.com";
-			$scope.InogDetails.AuthCode = "0099";
+		case '7xumRYY27UVH9EFa':
+			$scope.InogDetails.Name = "Tatiana";
+			$scope.InogDetails.SecretKey = "7xumRYY27UVH9EFa";
+			$scope.InogDetails.AuthCode = "5678";
 			UserService.WriteCookie($scope.InogDetails);
-
 			window.location = 'main.html';
-
+			break;
+		case '3vBeQempbqERuPZm':
+			$scope.InogDetails.Name = "Vijay";
+			$scope.InogDetails.SecretKey = "3vBeQempbqERuPZm";
+			$scope.InogDetails.AuthCode = "7890";
+			UserService.WriteCookie($scope.InogDetails);
+			window.location = 'main.html';
+			break;
+		case '3vBeQempbqERuPZm':
+			$scope.InogDetails.Name = "Sudhir";
+			$scope.InogDetails.SecretKey = "3vBeQempbqERuPZm";
+			$scope.InogDetails.AuthCode = "7890";
+			UserService.WriteCookie($scope.InogDetails);
+			window.location = 'main.html';
 			break;
 		default:
 			$scope.InogDetails.Name = "Guest";
@@ -85,52 +100,130 @@ appList
 							window.location = 'index.html';
 						}
 						$scope.InogDetails = cookieData;
-						//this is to get current working code
-						$http(
-								{
-									method : 'POST',
-									url : 'http://127.0.0.1:8100/GLV/getPasscode/',
-								}).then(function(response) {
-							console.log(response);
-							$scope.currentPasscode = response.data.passcode;
-							if ($scope.currentPasscode == "0000") {
-								$scope.open_curtain();
-							}
-							else {
-								$('body').css('background-color', 'black');
-								$('body').css('background-image', 'none');
-								$('#curtain1').css('width', '50%');
-								$('#curtain2').css('width', '50%');
-								$('body').css('background-size', 'cover');
+						// this is to get current working code
+						$http({
+							method : 'POST',
+							url : 'http://127.0.0.1:8100/GLV/getPasscode/',
+						})
+								.then(
+										function(response) {
+											console.log(response);
+											$scope.currentPasscode = response.data.passcode;
+											if ($scope.currentPasscode == "0000") {
+												$scope.open_curtain();
+												$scope.waitingMsg = null;
+												if($scope.InogDetails.SecretKey == "Ys9h5DhTHWpNteT3")
+													{
+													$('body').css(
+															'background-image',
+															'url("backim.jpg")');
+													window.location='admin.html';
+													}
 
-							}
-						}, function(error) {
-							console.log(error);
-						});
+											} else {
+												$('body').css(
+														'background-color',
+														'black');
+												$('body').css(
+														'background-image',
+														'url("backim.jpg")');
+												$('#curtain1').css('width',
+														'50%');
+												$('#curtain2').css('width',
+														'50%');
+												$('body').css(
+														'background-size',
+														'cover');
+												document
+														.getElementById("marquee").style.display = "none";
+												switch ($scope.currentPasscode) {
+												case 1234:
+													$scope.waitingMsg = "Waiting for Frederic to inaugurate..";
+													break;
+												case 3456:
+													$scope.waitingMsg = "Waiting for Ivo to inaugurate..";
+													break;
+												case 5678:
+													$scope.waitingMsg = "Waiting for Tatiana to inaugurate..";
+													break;
+												case 7890:
+													$scope.waitingMsg = "Waiting for Vijay to inaugurate..";
+													break;
+												default:
+													$scope.waitingMsg = "Waiting for Sudhir to inaugurate..";
+													break;
+												
+												}
+
+											}
+										}, function(error) {
+											console.log(error);
+										});
 
 					};
 					var ajaxCall = function() {
-						$http(
-								{
-									method : 'GET',
-									url : 'http://127.0.0.1:8100/GLV/getPasscode/'
-								}).then(function(response) {
-							$scope.currentPasscode = response.data.passcode;
-							console.log($scope.currentPasscode);
-							if ($scope.currentPasscode == "0000") {
-								$scope.open_curtain();
-							} else {
-								$('body').css('background-color', 'black');
-								$('body').css('background-image', 'none');
-								$('#curtain1').css('width', '50%');
-								$('#curtain2').css('width', '50%');
-								$('body').css('background-size', 'cover');
+						$http({
+							method : 'GET',
+							url : 'http://127.0.0.1:8100/GLV/getPasscode/'
+						})
+								.then(
+										function(response) {
+											$scope.currentPasscode = response.data.passcode;
+											console.log($scope.currentPasscode);
+											if ($scope.currentPasscode == "0000") {
+												$scope.open_curtain();
+												$scope.waitingMsg = null;
+												if($scope.InogDetails.SecretKey == "Ys9h5DhTHWpNteT3")
+												{
+													$('body').css(
+															'background-image',
+															'url("backim.jpg")');
+												window.location='admin.html';
+												}
+											} else {
+												$('body').css(
+														'background-color',
+														'black');
+												// $('body').css('background-image',
+												// 'url("curxx.jpeg")');
+												$('body').css(
+														'background-image',
+														'url("backim.jpg")');
+												$('#curtain1').css('width',
+														'50%');
+												$('#curtain2').css('width',
+														'50%');
+												$('body').css(
+														'background-size',
+														'cover');
+												document
+														.getElementById("marquee").style.display = "none";
+												switch ($scope.currentPasscode) {
+												case 1234:
+													$scope.waitingMsg = "Waiting for Frederic to inaugurate..";
+													break;
+												case 3456:
+													$scope.waitingMsg = "Waiting for Ivo to inaugurate..";
+													break;
+												case 5678:
+													$scope.waitingMsg = "Waiting for Tatiana to inaugurate..";
+													break;
+												case 7890:
+													$scope.waitingMsg = "Waiting for Vijay to inaugurate..";
+													break;
+												default:
+													$scope.waitingMsg = "Waiting for Sudhir to inaugurate..";
+													break;
+												
+												
+												}
 
-							}
 
-						}, function(error) {
-							console.log(error);
-						});
+											}
+
+										}, function(error) {
+											console.log(error);
+										});
 					}
 
 					var interval = $interval(ajaxCall, 1500)
@@ -160,17 +253,19 @@ appList
 						}, 1000);
 						$('body').css('background-image', 'url("giphy.gif")');
 						$('body').css('background-size', 'cover');
-
+						document.getElementById("marquee").style.display = "block";
 						var audio = document.getElementById("audio");
 						audio.play();
 
 					}
+					$scope.startLaunch = function()
+					{
 
-				
+						var startLaunchObj = {};
 
-					$scope.SaveCode = function(code) {
-//						alert(code);
-						var SaveUserAction = {};
+						 alert("start");
+						startLaunchObj.passcode = 1234;
+						
 						var config = {
 							headers : {
 								'Content-Type' : 'Content-Type: application/json; charset=utf-8',
@@ -178,23 +273,72 @@ appList
 
 							}
 						}
-						console.log(code);
-						SaveUserAction.passcode = code;
-						$http(
-								{
-									method : 'POST',
-									url : 'http://127.0.0.1:8100/GLV/setPasscode/',
-									data : SaveUserAction
-								}).then(function(response) {
-									$("#cutit").animate({
-							            top: '100px'
-							        });
-									$("#curtain1").animate({
-										width : 20
-									}, 1000);
-									$("#curtain2").animate({
-										width : 20
-									}, 1000);
+						
+						$http({
+							method : 'POST',
+							url : 'http://127.0.0.1:8100/GLV/setPasscode/',
+							data : startLaunchObj
+						}).then(function(response) {
+							window.location='main.html';
+							
+						}, function(error) {
+							console.log(error);
+
+						});
+					
+					}
+
+					$scope.SaveCode = function(code) {
+						var SaveUserAction = {};
+						var passcode;
+						switch (code) {
+						case 1234:
+							passcode = 3456;
+							console.log(code);
+							break;
+						case 3456:
+							passcode = 5678;
+							console.log(code);
+							break;
+						case 5678:
+							passcode = 7890;
+							console.log(code);
+							break;
+						case 7890:
+							passcode = 0000;
+							console.log(code);
+							break;
+							
+						
+						
+						}
+						// alert(code);
+						SaveUserAction.passcode = passcode;
+						
+						var config = {
+							headers : {
+								'Content-Type' : 'Content-Type: application/json; charset=utf-8',
+								'Access-Control-Allow-Origin' : '*'
+
+							}
+						}
+						
+						$http({
+							method : 'POST',
+							url : 'http://127.0.0.1:8100/GLV/setPasscode/',
+							data : SaveUserAction
+						}).then(function(response) {
+							$("#cutit").animate({
+								top : '100px'
+							}, 250, function() {
+								$("#curtain1").animate({
+									width : 20
+								}, 1000);
+								$("#curtain2").animate({
+									width : 20
+								}, 1000);
+							});
+							
 
 						}, function(error) {
 							console.log(error);
