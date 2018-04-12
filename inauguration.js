@@ -55,17 +55,17 @@ appList.controller('UserAuthController', function($scope, $http, $window,
 			UserService.WriteCookie($scope.InogDetails);
 			window.location = 'main.html';
 			break;
-		case '7xumRYY27UVH9EFa':
-			$scope.InogDetails.Name = "Tatiana";
-			$scope.InogDetails.SecretKey = "7xumRYY27UVH9EFa";
-			$scope.InogDetails.AuthCode = "5678";
-			UserService.WriteCookie($scope.InogDetails);
-			window.location = 'main.html';
-			break;
+//		case '7xumRYY27UVH9EFa':
+//			$scope.InogDetails.Name = "Tatiana";
+//			$scope.InogDetails.SecretKey = "7xumRYY27UVH9EFa";
+//			$scope.InogDetails.AuthCode = "5678";
+//			UserService.WriteCookie($scope.InogDetails);
+//			window.location = 'main.html';
+//			break;
 		case '3vBeQempbqERuPZm':
 			$scope.InogDetails.Name = "Vijay";
 			$scope.InogDetails.SecretKey = "3vBeQempbqERuPZm";
-			$scope.InogDetails.AuthCode = "7890";
+			$scope.InogDetails.AuthCode = "5678";
 			UserService.WriteCookie($scope.InogDetails);
 			window.location = 'main.html';
 			break;
@@ -103,7 +103,7 @@ appList
 						// this is to get current working code
 						$http({
 							method : 'POST',
-							url : 'http://ec2-18-218-82-100.us-east-2.compute.amazonaws.com:8100/GLV/getPasscode/',
+							url : 'http://127.0.0.1:8100/GLV/getPasscode/',
 						})
 								.then(
 										function(response) {
@@ -137,9 +137,9 @@ appList
 													$scope.waitingMsg = "Waiting for Ivo to inaugurate..";
 													break;
 												case 5678:
-													$scope.waitingMsg = "Waiting for Tatiana to inaugurate..";
-													break;
-												case 7890:
+//													$scope.waitingMsg = "Waiting for Tatiana to inaugurate..";
+//													break;
+//												case 7890:
 													$scope.waitingMsg = "Waiting for Vijay to inaugurate..";
 													break;
 												default:
@@ -157,7 +157,7 @@ appList
 					var ajaxCall = function() {
 						$http({
 							method : 'GET',
-							url : 'http://ec2-18-218-82-100.us-east-2.compute.amazonaws.com:8100/GLV/getPasscode/'
+							url : 'http://127.0.0.1:8100/GLV/getPasscode/'
 						})
 								.then(
 										function(response) {
@@ -192,9 +192,9 @@ appList
 													$scope.waitingMsg = "Waiting for Ivo to inaugurate..";
 													break;
 												case 5678:
-													$scope.waitingMsg = "Waiting for Tatiana to inaugurate..";
-													break;
-												case 7890:
+//													$scope.waitingMsg = "Waiting for Tatiana to inaugurate..";
+//													break;
+//												case 7890:
 													$scope.waitingMsg = "Waiting for Vijay to inaugurate..";
 													break;
 												default:
@@ -259,10 +259,10 @@ appList
 							console.log(code);
 							break;
 						case 5678:
-							passcode = 7890;
-							console.log(code);
-							break;
-						case 7890:
+//							passcode = 7890;
+//							console.log(code);
+//							break;
+//						case 7890:
 							passcode = 0000;
 							console.log(code);
 							break;
@@ -282,7 +282,7 @@ appList
 						
 						$http({
 							method : 'POST',
-							url : 'http://ec2-18-218-82-100.us-east-2.compute.amazonaws.com:8100/GLV/setPasscode/',
+							url : 'http://127.0.0.1:8100/GLV/setPasscode/',
 							data : SaveUserAction
 						}).then(function(response) {
 							$("#cutit").animate({
@@ -320,7 +320,7 @@ appList
 				// this is to get current working code
 				$http({
 					method : 'POST',
-					url : 'http://ec2-18-218-82-100.us-east-2.compute.amazonaws.com:8100/GLV/getPasscode/',
+					url : 'http://127.0.0.1:8100/GLV/getPasscode/',
 				})
 						.then(
 								function(response) {
@@ -341,9 +341,9 @@ appList
 											$scope.waitingMsg = "Waiting for Ivo to inaugurate..";
 											break;
 										case 5678:
-											$scope.waitingMsg = "Waiting for Tatiana to inaugurate..";
-											break;
-										case 7890:
+//											$scope.waitingMsg = "Waiting for Tatiana to inaugurate..";
+//											break;
+//										case 7890:
 											$scope.waitingMsg = "Waiting for Vijay to inaugurate..";
 											break;
 										default:
@@ -361,7 +361,7 @@ appList
 			var ajaxCall = function() {
 				$http({
 					method : 'GET',
-					url : 'http://ec2-18-218-82-100.us-east-2.compute.amazonaws.com:8100/GLV/getPasscode/'
+					url : 'http://127.0.0.1:8100/GLV/getPasscode/'
 				})
 						.then(
 								function(response) {
@@ -379,9 +379,9 @@ appList
 											$scope.waitingMsg = "Waiting for Ivo to inaugurate..";
 											break;
 										case 5678:
-											$scope.waitingMsg = "Waiting for Tatiana to inaugurate..";
-											break;
-										case 7890:
+//											$scope.waitingMsg = "Waiting for Tatiana to inaugurate..";
+//											break;
+//										case 7890:
 											$scope.waitingMsg = "Waiting for Vijay to inaugurate..";
 											break;
 										default:
@@ -418,7 +418,7 @@ appList
 				
 				$http({
 					method : 'POST',
-					url : 'http://ec2-18-218-82-100.us-east-2.compute.amazonaws.com:8100/GLV/setPasscode/',
+					url : 'http://127.0.0.1:8100/GLV/setPasscode/',
 					data : startLaunchObj
 				}).then(function(response) {
 					window.location='main.html';
