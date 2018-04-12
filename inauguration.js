@@ -20,11 +20,8 @@ appList.controller('UserAuthController', function($scope, $http, $window,
 		$cookies, UserService) {
 
 	$scope.init = function() {
-		var cookieData = UserService.ReadCookie();
-		console.log(cookieData);
-		if (cookieData != null) {
-			window.location = 'main.html';
-		}
+		UserService.RemoveCookie();
+//		window.location = 'index.html';
 
 	};
 
@@ -78,6 +75,7 @@ appList.controller('UserAuthController', function($scope, $http, $window,
 			break;
 		default:
 			$scope.InogDetails.Name = "Guest";
+		UserService.WriteCookie($scope.InogDetails);
 			window.location = 'main.html';
 			break;
 		}
